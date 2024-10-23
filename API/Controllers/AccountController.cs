@@ -20,23 +20,25 @@ namespace API.Controllers;
         {
             if (await UserExistsAsync(request.Username)) return BadRequest("Username already in use");
 
-            using var hmac = new HMACSHA512();
-            var user = new AppUser
-            {
-                UserName = request.Username,
-                PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
-                PasswordSalt = hmac.Key
-            };
+        return Ok();
+        
+        //     using var hmac = new HMACSHA512();
+        //     var user = new AppUser
+        //     {
+        //         UserName = request.Username,
+        //         PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(request.Password)),
+        //         PasswordSalt = hmac.Key
+        //     };
 
-            context.Users.Add(user);
-            await context.SaveChangesAsync();
+        //     context.Users.Add(user);
+        //     await context.SaveChangesAsync();
 
-            return new UserResponse
-            {
-                UserName = user.UserName,
-                Token = tokenService.CreateToken(user)
-            };
-        }
+        //     return new UserResponse
+        //     {
+        //         UserName = user.UserName,
+        //         Token = tokenService.CreateToken(user)
+        //     };
+        // }
 
         [HttpPost("login")]
         public async Task<ActionResult<UserResponse>> LoginAsync(LoginRequest request)
