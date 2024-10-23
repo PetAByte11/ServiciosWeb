@@ -43,6 +43,4 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       throw error;
     })
   );
-
-  return next(req);
 };
