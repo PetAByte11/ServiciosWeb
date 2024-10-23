@@ -21,7 +21,7 @@ namespace API.Controllers;
             if (await UserExistsAsync(request.Username)) return BadRequest("Username already in use");
 
         return Ok();
-        
+
         //     using var hmac = new HMACSHA512();
         //     var user = new AppUser
         //     {
@@ -38,8 +38,8 @@ namespace API.Controllers;
         //         UserName = user.UserName,
         //         Token = tokenService.CreateToken(user)
         //     };
-        // }
-
+         }
+        
         [HttpPost("login")]
         public async Task<ActionResult<UserResponse>> LoginAsync(LoginRequest request)
         {
