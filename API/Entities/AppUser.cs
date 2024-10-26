@@ -10,8 +10,8 @@ public class AppUser
     public required byte[] PasswordSalt { get; set;}
     public DateOnly Birthday { get; set;}
     public required string KnownAs { get; set;}
-    public DateTime Created { get; set;}
-    public DateTime LastActive { get; set;}
+    public DateTime Created { get; set;} = DateTime.Now;
+    public DateTime LastActive { get; set;} = DateTime.Now;
     public required string Gender { get; set;}
     public string? Introducction { get; set;}
     public string? Interests { get; set;}
