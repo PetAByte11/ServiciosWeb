@@ -9,45 +9,30 @@ namespace API.Controllers;
 public class UsersController : BaseApiController
 {
     private readonly IUserRepository _repository;
-    private readonly IMapper _mapper;
 
-    public UsersController(IUserRepository repository, IMapper mapper)
+    public UsersController(IUserRepository repository)
     {
         _repository = repository;
-        _mapper = mapper;
     }
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<MemberResponse>>> GetAllAsync()
     {
-        var users = await _repository.GetAllAsync();
+        var members = await _repository.GetMembersAsync();
 
-        var response = _mapper.Map<IEnumerable<MemberResponse>>(users);
-
-        return Ok(response);
-    }
-    
-    [Authorize]
-    [HttpGet("{id:int}")] //api/users/2
-    public async Task<ActionResult<MemberResponse>> GetByIdAsync(int id)
-    {
-        var user = await _repository.GetByIdAsync(id);
-
-        if (user == null) return NotFound();
-
-        return _mapper.Map<MemberResponse>(user);
+        return Ok(members);
     }
 
     [HttpGet("{username}")] // api/v1/users/Calamardo
-    public async Task<ActionResult<MemberResponse>> GetByIdAsync(string username)
+    public async Task<ActionResult<MemberResponse>> GetByUsernameAsync(string username)
     {
-        var user = await _repository.GetByUserNameAsync(username);
+        var member = await _repository.GetMemberAsync(username);
 
-        if (user == null){
+        if (member == null){
             return NotFound();
         }
 
-        return _mapper.Map<MemberResponse>(user);
+        return member;
     }
 
 }

@@ -2,9 +2,12 @@ using System.Collections.Generic;
 using API.Entities;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using API.DTOs;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
 namespace API.Data;
 
-public class UserRepository(DataContext context) : IUserRepository
+public class UserRepository(DataContext context, IMapper mapper) : IUserRepository
 {
     public async Task<IEnumerable<AppUser>> GetAllAsync() 
         => await context.Users
@@ -18,6 +21,18 @@ public class UserRepository(DataContext context) : IUserRepository
         => await context.Users
             .Include(u => u.Photos)
             .SingleOrDefaultAsync(x => x.UserName == userName);
+
+    public async Task<MemberResponse?> GetMemberAsync( string username ) 
+        => await context.Users
+            .Where(u => u.UserName == username)
+            .ProjectTo<MemberResponse>(mapper.ConfigurationProvider)
+            .SingleOrDefaultAsync();
+
+    public async Task<IEnumerable<MemberResponse>> GetMembersAsync() 
+        => await context.Users
+            .ProjectTo<MemberResponse>(mapper.ConfigurationProvider)
+            .ToListAsync();
+
     public async Task<bool> SaveAllAsync() 
         => await context.SaveChangesAsync() > 0;
     public void Update(AppUser user) 
