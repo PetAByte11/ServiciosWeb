@@ -1,19 +1,20 @@
 using API.Data;
 using API.DTOs;
-using API.Entities;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 [Authorize]
 public class UsersController : BaseApiController
 {
     private readonly IUserRepository _repository;
+    private readonly IMapper _mapper;
 
-    public UsersController(IUserRepository repository)
+    public UsersController(IUserRepository repository, IMapper mapper)
     {
         _repository = repository;
+        _mapper = mapper;
     }
 
     [HttpGet]
@@ -21,7 +22,9 @@ public class UsersController : BaseApiController
     {
         var users = await _repository.GetAllAsync();
 
-        return Ok(users);
+        var response = _mapper.Map<IEnumerable<MemberResponse>>(users);
+
+        return Ok(response);
     }
     
     [Authorize]
@@ -32,17 +35,19 @@ public class UsersController : BaseApiController
 
         if (user == null) return NotFound();
 
-        return user;
+        return _mapper.Map<MemberResponse>(user);
     }
 
     [HttpGet("{username}")] // api/v1/users/Calamardo
-    public async Task<ActionResult<AppUser>> GetByIdAsync(string username)
+    public async Task<ActionResult<MemberResponse>> GetByIdAsync(string username)
     {
         var user = await _repository.GetByUserNameAsync(username);
 
-        if (user == null) return NotFound();
+        if (user == null){
+            return NotFound();
+        }
 
-        return user;
+        return _mapper.Map<MemberResponse>(user);
     }
 
 }
