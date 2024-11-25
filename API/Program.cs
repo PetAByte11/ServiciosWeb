@@ -1,44 +1,43 @@
-using System.Text;
+namespace API;
+
 using API.Data;
-using API.Extensions;
-using API.Middlewares;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Threading.Tasks;
 
-var builder = WebApplication.CreateBuilder(args);
+public class Program
+{
+    public static async Task Main(string[] args)
+    {
+        var host = CreateHostBuilder(args).Build();
+        using var scope = host.Services.CreateScope();
+        var services = scope.ServiceProvider;
 
-// Add services to the container.
-builder.Services.AddAplicationServices(builder.Configuration);
-builder.Services.AddIdentityServices(builder.Configuration);
-var app = builder.Build();
-
-//Configure the HTTP request pipeline.
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseCors((cors) => cors
-    .AllowAnyHeader()
-    .AllowAnyMethod()
-    .WithOrigins(
-        "https//localhost:4200",
-        "https://localhost:4200"));
-
-app.UseAuthentication();
-app.UseAuthorization();
-app.MapControllers();
-
-using var scope = app.Services.CreateScope();
-var services = scope.ServiceProvider;
 try
-{
-    var context = services.GetRequiredService<DataContext>();
-    await context.Database.MigrateAsync();
-    await Seed.SeedUsersAsync(context);
-}
-catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error ocurred during migration/seeding.");
-}
+        {
+            var context = services.GetRequiredService<DataContext>();
+            // var userManager = services.GetRequiredService<UserManager<AppUser>>();
+            // var roleManger = services.GetRequiredService<RoleManager<AppRole>>();
 
-app.Run();
+            await context.Database.MigrateAsync();
+                        await Seed.SeedUsersAsync(context); // (userManager, roleManger);
+                    }
+                    catch (Exception ex)
+                    {
+                        var logger = services.GetRequiredService<ILogger<Program>>();
+                        logger.LogError(ex, "An error has ocurred during migration/seeding");
+                    }
+        await host.RunAsync();
+    }
+
+    public static IHostBuilder CreateHostBuilder(string[] args) =>
+        Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
+}
