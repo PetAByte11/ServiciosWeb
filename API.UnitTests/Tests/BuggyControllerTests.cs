@@ -5,22 +5,24 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using API.DTOs;
-using API.UnitTests.Helpers;
 using Newtonsoft.Json.Linq;
 
 public class BuggyControllerTests
 {
-    private string apiRoute = "api/buggy";
+    private readonly string apiRoute = "api/buggy";
     private readonly HttpClient _client;
     private HttpResponseMessage httpResponse;
     private string requestUrl;
-    private string loginObjetct;
+    private string loginObject;
     private HttpContent httpContent;
+    private object? password;
+
+    public object Password { get; }
 
     public BuggyControllerTests()
     {
-        _client = TestHelper.Instance.Client;
-    }
+       Password = password
+    };
 
     [Theory]
     [InlineData("OK", "arenita", "123456")]
@@ -34,8 +36,8 @@ public class BuggyControllerTests
             Password = password
         };
 
-        loginObjetct = GetLoginObject(loginRequest);
-        httpContent = GetHttpContent(loginObjetct);
+        loginObject = GetLoginObject(loginRequest);
+        httpContent = GetHttpContent(loginObject);
 
         httpResponse = await _client.PostAsync(requestUrl, httpContent);
         var reponse = await httpResponse.Content.ReadAsStringAsync();
@@ -111,10 +113,8 @@ public class BuggyControllerTests
         return entityObject.ToString();
     }
 
-    private static StringContent GetHttpContent(string objectToCode)
-    {
-        return new StringContent(objectToCode, Encoding.UTF8, "application/json");
-    }
+    private static StringContent GetHttpContent(string objectToCode) =>
+        new(objectToCode, Encoding.UTF8, "application/json");
 
     #endregion
 }
