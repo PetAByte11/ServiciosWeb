@@ -5,6 +5,8 @@ using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 using API.DTOs;
+using API.UnitTests.Helpers;
+using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 
 public class BuggyControllerTests
@@ -15,25 +17,22 @@ public class BuggyControllerTests
     private string requestUrl;
     private string loginObject;
     private HttpContent httpContent;
-    private object? password;
-
-    public object Password { get; }
 
     public BuggyControllerTests()
     {
        Password = password
     };
 
-    [Theory]
-    [InlineData("OK", "arenita", "123456")]
-    public async Task GetSecretShouldOK(string statusCode, string username, string password)
+    [Fact]
+    public async Task GetSecretShouldOK()
     {
         // Arrange
+        var expectedStatusCode = "OK";
         requestUrl = "api/account/login";
         var loginRequest = new LoginRequest
         {
-            Username = username,
-            Password = password
+            Username = "arenita",
+            Password = "123456"
         };
 
         loginObject = GetLoginObject(loginRequest);
@@ -51,8 +50,8 @@ public class BuggyControllerTests
         httpResponse = await _client.GetAsync(requestUrl);
 
         // Assert
-        Assert.Equal(Enum.Parse<HttpStatusCode>(statusCode, true), httpResponse.StatusCode);
-        Assert.Equal(statusCode, httpResponse.StatusCode.ToString());
+        Assert.Equal(Enum.Parse<HttpStatusCode>(expectedStatusCode, true), httpResponse.StatusCode);
+        Assert.Equal(expectedStatusCode, httpResponse.StatusCode.ToString());
     }
 
     [Theory]
