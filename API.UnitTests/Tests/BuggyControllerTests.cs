@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.Json;
 using API.DTOs;
 using API.UnitTests.Helpers;
-using Microsoft.AspNetCore.Identity;
 using Newtonsoft.Json.Linq;
 
 public class BuggyControllerTests
@@ -20,8 +19,8 @@ public class BuggyControllerTests
 
     public BuggyControllerTests()
     {
-       Password = password
-    };
+        _client = TestHelper.Instance.Client;
+    }
 
     [Fact]
     public async Task GetSecretShouldOK()
