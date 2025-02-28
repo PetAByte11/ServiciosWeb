@@ -1,7 +1,11 @@
 namespace API.UnitTests;
 
 using API.Data;
+<<<<<<< HEAD
 using API.Entities;
+=======
+using API.DataEntities;
+>>>>>>> datingapp/main
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
@@ -26,24 +30,41 @@ public class APIWebApplicationFactory<IStartup> : WebApplicationFactory<Startup>
                 cbld.SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile($"appsettings.json", optional: false, reloadOnChange: true)
                     .AddEnvironmentVariables();
+<<<<<<< HEAD
+=======
+
+>>>>>>> datingapp/main
                 Configuration = cbld.Build();
             })
             .ConfigureServices(services =>
             {
+<<<<<<< HEAD
                 // Remove the app's ApplicationDbContext registration.
                 var descriptor = services.SingleOrDefault(
                     d => d.ServiceType == typeof(DbContextOptions<DataContext>));
+=======
+                // Remove the app's ApplicationDbContext registration.
+                var descriptor = services.SingleOrDefault(
+                    d => d.ServiceType == typeof(DbContextOptions<DataContext>));
+
+>>>>>>> datingapp/main
                 if (descriptor != null)
                 {
                     services.Remove(descriptor);
                 }
+<<<<<<< HEAD
                 // Add a database context using an in-memory database for testing.
+=======
+
+                // Add a database context using an in-memory database for testing.
+>>>>>>> datingapp/main
                 services.AddDbContext<DataContext>(options =>
                 {
                     options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
                     options.EnableSensitiveDataLogging();
                 });
             })
+<<<<<<< HEAD
             // ConfigureTestServices will be fired after actual Startup's ConfigureServices are called
             // Hence anything written in this will override that setting (except EF Sql DBContext)
             .ConfigureTestServices(async services =>
@@ -57,11 +78,33 @@ public class APIWebApplicationFactory<IStartup> : WebApplicationFactory<Startup>
                     {
                         await context.Database.MigrateAsync();
                         await Seed.SeedUsersAsync(context);
+=======
+            // ConfigureTestServices will be fired after actual Startup's ConfigureServices are called
+            // Hence anything written in this will override that setting (except EF Sql DBContext)
+            .ConfigureTestServices(async services =>
+            {
+                // Build the service provider.
+                var sp = services.BuildServiceProvider();
+
+                using (var scope = sp.CreateScope())
+                {
+                    var context = sp.GetRequiredService<DataContext>();
+
+                    try
+                    {
+                        await context.Database.MigrateAsync();
+                        // await Seed.SeedUsersAsync(context);
+                        __loadTestData(context);
+>>>>>>> datingapp/main
                     }
                     catch (Exception ex)
                     {
                         var logger = sp.GetRequiredService<ILogger<Program>>();
+<<<<<<< HEAD
                         logger.LogError(ex, "An error has occurred during migration/seeding.");
+=======
+                        logger.LogError(ex, "An error has occurred during migration/seeding.");
+>>>>>>> datingapp/main
                     }
                 }
             });
@@ -106,4 +149,8 @@ internal static class LoadTestData<T> where T : class
 
         return true;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> datingapp/main

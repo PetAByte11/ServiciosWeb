@@ -16,12 +16,20 @@ import { TitleCasePipe } from '@angular/common';
 export class NavComponent {
   accountService = inject(AccountService);
   private router = inject(Router);
+<<<<<<< HEAD
   private toastr = inject(ToastrService)
+=======
+  private toastr = inject(ToastrService);
+>>>>>>> datingapp/main
   model: any = {};
 
   login(): void {
     this.accountService.login(this.model).subscribe({
+<<<<<<< HEAD
       next: () => {
+=======
+      next: _ => {
+>>>>>>> datingapp/main
         this.router.navigateByUrl("/members");
       },
       error: (error) => {

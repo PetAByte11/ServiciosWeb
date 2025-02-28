@@ -1,6 +1,10 @@
 import { ApplicationConfig, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideAnimations } from '@angular/platform-browser/animations';
+<<<<<<< HEAD
+=======
+
+>>>>>>> datingapp/main
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { provideToastr } from 'ngx-toastr';
@@ -26,5 +30,9 @@ export const appConfig: ApplicationConfig = {
         imageSize: 'contain'
       } as GalleryConfig
     }
+<<<<<<< HEAD
     ]
+=======
+  ]
+>>>>>>> datingapp/main
 };

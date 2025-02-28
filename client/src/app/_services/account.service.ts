@@ -19,7 +19,10 @@ export class AccountService {
           localStorage.setItem("user", JSON.stringify(user));
           this.currentUser.set(user);
         }
+<<<<<<< HEAD
         return user;
+=======
+>>>>>>> datingapp/main
       })
     );
   }
@@ -31,6 +34,10 @@ export class AccountService {
           localStorage.setItem("user", JSON.stringify(user));
           this.currentUser.set(user);
         }
+<<<<<<< HEAD
+=======
+        return user;
+>>>>>>> datingapp/main
       })
     );
   }

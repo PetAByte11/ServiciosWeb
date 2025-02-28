@@ -1,11 +1,22 @@
 namespace API.Data;
 
+<<<<<<< HEAD
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using API.Entities;
 using Microsoft.EntityFrameworkCore;
 
+=======
+using System.Diagnostics.CodeAnalysis;
+using System.Security.Cryptography;
+using System.Text;
+using System.Text.Json;
+using API.DataEntities;
+using Microsoft.EntityFrameworkCore;
+
+[ExcludeFromCodeCoverage]
+>>>>>>> datingapp/main
 public class Seed
 {
     public static async Task SeedUsersAsync(DataContext context)
@@ -37,4 +48,8 @@ public class Seed
 
         await context.SaveChangesAsync();
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> datingapp/main

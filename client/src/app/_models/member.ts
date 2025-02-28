@@ -7,7 +7,11 @@ export interface Member {
     photoUrl: string;
     knownAs: string;
     created: Date;
+<<<<<<< HEAD
     lastACtive: Date;
+=======
+    lastActive: Date;
+>>>>>>> datingapp/main
     gender: string;
     introduction: string;
     interests: string;
@@ -16,4 +20,7 @@ export interface Member {
     country: string;
     photos: Photo[];
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> datingapp/main

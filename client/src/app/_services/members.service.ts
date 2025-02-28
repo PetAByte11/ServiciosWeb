@@ -12,13 +12,21 @@ export class MembersService {
   baseUrl = environment.apiUrl;
   members = signal<Member[]>([]);
 
+<<<<<<< HEAD
   getMembers(){
+=======
+  getMembers() {
+>>>>>>> datingapp/main
     return this.http.get<Member[]>(this.baseUrl + "users").subscribe({
       next: members => this.members.set(members)
     });
   }
 
+<<<<<<< HEAD
   getMember(username: string){
+=======
+  getMember(username: string) {
+>>>>>>> datingapp/main
     const member = this.members().find(m => m.userName === username);
     if (member !== undefined) {
       return of(member);
@@ -34,5 +42,8 @@ export class MembersService {
       })
     );
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> datingapp/main
 }

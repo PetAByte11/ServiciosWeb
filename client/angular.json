@@ -27,7 +27,11 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "./node_modules/font-awesome/css/font-awesome.min.css",
+<<<<<<< HEAD
               "./node_modules/bootswatch/dist/quartz/bootstrap.min.css",
+=======
+              "./node_modules/bootswatch/dist/United/bootstrap.min.css",
+>>>>>>> datingapp/main
               "./node_modules/ngx-spinner/animations/fire.css",
               "./node_modules/ngx-toastr/toastr.css",
               "src/styles.css"
@@ -107,5 +111,11 @@
         }
       }
     }
+<<<<<<< HEAD
+=======
+  },
+  "cli": {
+    "analytics": false
+>>>>>>> datingapp/main
   }
 }

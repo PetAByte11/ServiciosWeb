@@ -8,7 +8,11 @@ import { RegisterComponent } from "../register/register.component";
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
+<<<<<<< HEAD
 export class HomeComponent{
+=======
+export class HomeComponent {
+>>>>>>> datingapp/main
   registerMode = false;
 
   registerToggle(): void {

@@ -21,7 +21,11 @@ public class Startup
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+<<<<<<< HEAD
         services.AddAplicationServices(_config);
+=======
+        services.AddApplicationServices(_config);
+>>>>>>> datingapp/main
         services.AddControllers();
         services.AddIdentityServices(_config);
     }
@@ -37,4 +41,8 @@ public class Startup
         app.UseAuthorization();
         app.UseEndpoints(endpoints => endpoints.MapControllers());
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> datingapp/main

@@ -7,7 +7,11 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class BusyService {
   busyRequestCount = 0;
   private spinnerService = inject(NgxSpinnerService);
+<<<<<<< HEAD
 
+=======
+  
+>>>>>>> datingapp/main
   busy(): void {
     this.busyRequestCount++;
     this.spinnerService.show(undefined, {});
@@ -20,4 +24,8 @@ export class BusyService {
       this.spinnerService.hide();
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> datingapp/main

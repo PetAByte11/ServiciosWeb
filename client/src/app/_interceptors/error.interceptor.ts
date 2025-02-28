@@ -7,6 +7,7 @@ import { catchError } from 'rxjs';
 export const errorInterceptor: HttpInterceptorFn = (req, next) => {
   const router = inject(Router);
   const toastr = inject(ToastrService);
+<<<<<<< HEAD
 
   return next(req).pipe(
     catchError(error => {
@@ -14,6 +15,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         switch(error.status){
           case 400:
             if (error.error.errors){
+=======
+  
+  return next(req).pipe(
+    catchError(error => {
+      if (error) {
+        switch(error.status) {
+          case 400:
+            if (error.error.errors) {
+>>>>>>> datingapp/main
               const modalStateErrors = [];
               for (const key in error.error.errors) {
                 if (error.error.errors[key]) {
@@ -32,15 +42,28 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
             router.navigateByUrl("/not-found");
             break;
           case 500:
+<<<<<<< HEAD
             const navigationExtras: NavigationExtras = { state: {error: error.error}};
             router.navigateByUrl("server-error", navigationExtras);
             break;
           default:
             toastr.error("The unexpected error happended!");
+=======
+            const navigationExtras: NavigationExtras = {state: {error: error.error}};
+            router.navigateByUrl("server-error", navigationExtras);
+            break;
+          default:
+            toastr.error("The unexpected error happened!")
+>>>>>>> datingapp/main
             break;
         }
       }
       throw error;
     })
   );
+<<<<<<< HEAD
+=======
+
+  return next(req);
+>>>>>>> datingapp/main
 };

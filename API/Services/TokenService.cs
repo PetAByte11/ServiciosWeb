@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -6,12 +7,30 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace API.Services;
 
+=======
+namespace API.Services;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
+using API.DataEntities;
+using Microsoft.IdentityModel.Tokens;
+
+>>>>>>> datingapp/main
 public class TokenService(IConfiguration config) : ITokenService
 {
     public string CreateToken(AppUser user)
     {
+<<<<<<< HEAD
         var tokenKey = config["TokenKey"] ?? throw new Exception("TokenKey not found");
         if (tokenKey.Length < 64) throw new Exception("TokenKey too short");
+=======
+        var tokenKey = config["TokenKey"] ?? throw new ArgumentException("TokenKey not found");
+        if (tokenKey.Length < 64)
+        {
+            throw new ArgumentException("TokenKey too short");
+        }
+
+>>>>>>> datingapp/main
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(tokenKey));
 
         var claims = new List<Claim>
@@ -31,6 +50,12 @@ public class TokenService(IConfiguration config) : ITokenService
         var tokenHandler = new JwtSecurityTokenHandler();
         var token = tokenHandler.CreateToken(tokenDescriptor);
 
+<<<<<<< HEAD
         return tokenHandler.WriteToken(token);    
     }
 }
+=======
+        return tokenHandler.WriteToken(token);
+    }
+}
+>>>>>>> datingapp/main

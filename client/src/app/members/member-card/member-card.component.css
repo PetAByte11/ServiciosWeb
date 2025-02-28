@@ -3,6 +3,7 @@
     transition-duration: 500ms;
     transition-timing-function: ease-out;
 }
+<<<<<<< HEAD
 
 .card img {
     transform: scale(1.0,1.0);
@@ -10,11 +11,21 @@
     transition-timing-function: ease-out;
 }
 
+=======
+.card img {
+    transform: scale(1.0,1.0);
+    transition-duration: 1500ms;
+    transition-timing-function: ease-out;
+}
+>>>>>>> datingapp/main
 .card-img-wrapper {
     overflow: hidden;
     position: relative;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> datingapp/main
 .member-icons {
     position: absolute;
     bottom: -30%;
@@ -24,12 +35,21 @@
     margin-left: auto;
     opacity: 0;
 }
+<<<<<<< HEAD
 
+=======
+>>>>>>> datingapp/main
 .card-img-wrapper:hover .member-icons {
     bottom: 0;
     opacity: 1;
 }
+<<<<<<< HEAD
 
 .animate {
     transition: all 0.3s ease-out;
 }
+=======
+.animate {
+    transition: all 0.3s ease-in-out;
+}
+>>>>>>> datingapp/main

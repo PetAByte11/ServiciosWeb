@@ -4,7 +4,11 @@ using API.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+<<<<<<< HEAD
 public class BuggyController(DataContext context): BaseApiController
+=======
+public class BuggyController(DataContext context) : BaseApiController
+>>>>>>> datingapp/main
 {
     [Authorize]
     [HttpGet("auth")]
@@ -16,6 +20,7 @@ public class BuggyController(DataContext context): BaseApiController
     [HttpGet("server-error")]
     public ActionResult<string> GetServerError()
     {
+<<<<<<< HEAD
         try{
             var result = context.Users.Find(-1) ??
             throw new ArgumentException("Server error ocurred!");
@@ -30,4 +35,13 @@ public class BuggyController(DataContext context): BaseApiController
     [HttpGet("bad-request")]
     public ActionResult<string> GetBadRequest() => BadRequest("Bad request happend");
 
+=======
+        var result = context.Users.Find(-1) ??
+            throw new ArgumentException("Server error occured!");
+        return "random text";
+    }
+
+    [HttpGet("bad-request")]
+    public ActionResult<string> GetBadRequest() => BadRequest("Bad request happened");
+>>>>>>> datingapp/main
 }

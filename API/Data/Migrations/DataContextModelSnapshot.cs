@@ -22,7 +22,11 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+<<<<<<< HEAD
                     b.Property<DateOnly>("Birthday")
+=======
+                    b.Property<DateOnly>("BirthDay")
+>>>>>>> datingapp/main
                         .HasColumnType("TEXT");
 
                     b.Property<string>("City")
@@ -43,7 +47,11 @@ namespace API.Data.Migrations
                     b.Property<string>("Interests")
                         .HasColumnType("TEXT");
 
+<<<<<<< HEAD
                     b.Property<string>("Introducction")
+=======
+                    b.Property<string>("Introduction")
+>>>>>>> datingapp/main
                         .HasColumnType("TEXT");
 
                     b.Property<string>("KnownAs")
@@ -79,7 +87,11 @@ namespace API.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+<<<<<<< HEAD
                     b.Property<int?>("AppUserId")
+=======
+                    b.Property<int>("AppUserId")
+>>>>>>> datingapp/main
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("IsMain")
@@ -96,14 +108,28 @@ namespace API.Data.Migrations
 
                     b.HasIndex("AppUserId");
 
+<<<<<<< HEAD
                     b.ToTable("Photo");
+=======
+                    b.ToTable("Photos");
+>>>>>>> datingapp/main
                 });
 
             modelBuilder.Entity("API.Entities.Photo", b =>
                 {
+<<<<<<< HEAD
                     b.HasOne("API.Entities.AppUser", null)
                         .WithMany("Photos")
                         .HasForeignKey("AppUserId");
+=======
+                    b.HasOne("API.Entities.AppUser", "AppUser")
+                        .WithMany("Photos")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+>>>>>>> datingapp/main
                 });
 
             modelBuilder.Entity("API.Entities.AppUser", b =>

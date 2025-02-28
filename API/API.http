@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 @API_HostAddress = http://localhost:5232
+=======
+@API_HostAddress = http://localhost:5212
+>>>>>>> datingapp/main
 
 GET {{API_HostAddress}}/weatherforecast/
 Accept: application/json
